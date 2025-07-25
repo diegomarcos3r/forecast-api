@@ -1,0 +1,73 @@
+📊 Forecast API – Simulação Monte Carlo para Previsão de Backlog
+
+API desenvolvida com FastAPI para simular, por meio de Monte Carlo, o número de semanas necessário para concluir um backlog com base em históricos de throughput.
+
+🚀 Tecnologias Utilizadas
+Python 3.8+
+
+FastAPI
+
+NumPy
+
+Uvicorn
+
+🧠 Descrição
+Esta API realiza simulações Monte Carlo a partir de um intervalo de backlog e uma lista de throughput semanal. Ela retorna os percentis 50, 75, 85 e 95 das semanas simuladas para previsão do tempo necessário para conclusão do trabalho.
+
+📁 Estrutura de Arquivos
+
+.
+├── main.py                    # Arquivo principal com endpoint da API
+├── services/
+│   └── forecast.py            # Lógica de simulação e cálculo de percentis
+├── models/
+│   └── simulation.py          # (Definição de CreateSimulation)
+├── requirements.txt           # Dependências do projeto
+
+
+📬 Endpoint
+POST /create-simulation
+Roda a simulação com os dados fornecidos e retorna a previsão em semanas.
+
+📝 Corpo da Requisição (JSON)
+json
+
+{
+  "nr_simulations": 1000,
+  "backlog_min": 5,
+  "backlog_max": 10,
+  "throughput": [2, 3, 4, 5]
+}
+
+nr_simulations: Número de simulações Monte Carlo a serem executadas
+
+backlog_min: Tamanho mínimo do backlog
+
+backlog_max: Tamanho máximo do backlog
+
+throughput: Lista de valores históricos de throughput (itens concluídos por semana)
+
+📤 Exemplo de Resposta (JSON)
+
+{
+  "Backlog-min": 5,
+  "Backlog-max": 10,
+  "Throughput": [2, 3, 4, 5],
+  "Simulations": 1000,
+  "Percentil-50": 3,
+  "Percentil-75": 4,
+  "Percentil-85": 5,
+  "Percentil-95": 6
+}
+
+
+▶️ Como Rodar Localmente
+Clone o repositório:
+
+git clone https://github.com/seu-usuario/forecast-api.git
+cd forecast-api
+Crie e ative um ambiente virtual:
+
+Com o Docker instalar faça um Docker compose build up
+Acessa o ambiente local com a porta definida no Dockerfile e use o swagger ou postman para fazer as requisições HTTP via método POST ao endpoint '/create-simulation' utilizando o payload de exemplo descrito acima
+
